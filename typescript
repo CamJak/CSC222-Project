@@ -1,0 +1,17 @@
+Script started on 2022-02-09 12:28:23-08:00 [TERM="xterm-256color" TTY="/dev/pts/0" COLUMNS="80" LINES="24"]
+[1;32mcam[1;32m@[1;32mubuntu:[1;35m~/Desktop/CSC222-Project[1;36m$[0m make
+/home/cam/Desktop/CSC222-Project$ hello
+I should be running in a child process...
+/home/cam/Desktop/CSC222-Project$ cd ..
+/home/cam/Desktop$ cd ..
+/home/cam$ cd ./Desktop/CSC222-Project
+/home/cam/Desktop/CSC222-Project$ pwd
+/home/cam/Desktop/CSC222-Project
+/home/cam/Desktop/CSC222-Project$ cd ..
+/home/cam/Desktop$ pwd
+/home/cam/Desktop
+/home/cam/Desktop$ exit
+[1;32mcam[1;32m@[1;32mubuntu:[1;35m~/Desktop/CSC222-Project[1;36m$[0m exit
+exit
+
+Script done on 2022-02-09 12:29:10-08:00 [COMMAND_EXIT_CODE="0"]
