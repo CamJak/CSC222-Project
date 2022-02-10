@@ -45,7 +45,10 @@ char keyword_check (char input[], char *ptr) {
 	char* token = strtok(input, " ");
 	if (strcmp(token, "cd") == 0) {
 		token = strtok(NULL, " ");
-		chdir(token);
+		int ch = chdir(token);
+		if(ch<0) {
+            		printf("%s: No such file or directory\n", token);
+        	}
 		return 1;
 	}
 	
