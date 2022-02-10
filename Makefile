@@ -1,7 +1,4 @@
-all: functions techshell clean
-
-functions: functions.c
-	@gcc -o func functions.c
+all: techshell clean
 	
 techshell: techshell.c
 	@gcc -o techshell techshell.c
@@ -9,4 +6,3 @@ techshell: techshell.c
 	
 clean:
 	@rm -f techshell
-	@rm -f func
