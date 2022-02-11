@@ -5,6 +5,10 @@
 #include <string.h>
 #include "./functions.c"
 
+#define KNRM "\x1B[0m"
+#define KGRN "\x1B[92m"
+#define KCYN "\x1B[96m"
+
 int main (void) {
 	// initialize variables
 	char input[256];
@@ -19,7 +23,7 @@ int main (void) {
 		// get cwd and display terminal string and await user input
 		char *ptr = get_cwd_custom();
 		
-		printf("%s$ ", ptr);
+		printf("%s%s%s$%s ", KGRN, ptr, KCYN, KNRM);
 		
 		scanf("%[^\n]%*c", input);
 		
