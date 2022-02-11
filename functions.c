@@ -45,11 +45,176 @@ char keyword_check (char input[], char *ptr) {
 	char* token = strtok(input, " ");
 	if (strcmp(token, "cd") == 0) {
 		token = strtok(NULL, " ");
-		chdir(token);
+		int ch = chdir(token);
+		if(ch<0) {
+            		printf("%s: No such file or directory\n", token);
+        	}
 		return 1;
 	}
 	
 	// if none, return 0
 	return 0;
 }
+
+
+
+char execute_command (char input[], char debug) {
+
+	int params = 0;
+	char toggle = 0;
+	char* input2 = strdup(input);
+	char* token = strtok(input, " ");
+	
+	if (debug)
+		printf("Arguments: ");
+	while(token != NULL) {
+         	params += 1;
+         	if (debug)
+         		printf("%s ", token);
+         	token = strtok(NULL, " ");
+      	}
+      		
+      	if (debug)
+      		printf("\nNumber of Arguments: %d ", params);
+      		
+      	char* argument_list[params];
+		
+	token = strtok(input2, " ");
+			
+	if (debug)
+		printf("\nArgument List: ");
+		fflush(stdout);
+    	for(int i = 0; i < params + 1; i++) {
+        	argument_list[i] = token;
+        	if (debug)
+    			printf("%s ", token);
+        	token = strtok(NULL, " ");
+    	}
+    			
+	int status;
+			
+	pid_t pid = fork();
+			
+	// if we need the PID of the Child
+    	pid_t child = getpid();
+
+		
+	// if in child process
+	if(pid == 0){
+		// run input inside child process bro ...
+        	if (debug) 
+        		printf("\nIn Child: %d\n", child);
+        	toggle = 1;
+        	fflush(stdout);
+        	int status_code = execvp(argument_list[0], argument_list);
+        	
+        	if (status_code == -1) {
+        		printf("%s: command not found\n", input);
+        		exit(100);
+        	}
+	}	
+        // if in parent process
+    	else {
+    		toggle = 1;
+		wait(NULL);
+    	}
+    	return 1;
+}
+
+char input_output_redirection(char input[], char debug) {
+	int params = 0;
+	char toggle = 0;
+	char input_file = 0;
+	char output_file = 0;
+	char* in_file;
+	char* out_file;
+	char* input2 = strdup(input);
+	char* token = strtok(input, " ");
+	
+	while(token != NULL) {
+		params += 1;
+         	if (debug)
+         		printf("%s ", token);
+         	if (*token == 0x3C) 
+         		input_file = 1;
+         	if (*token == 0x3E)
+         		output_file = 1;
+         	token = strtok(NULL, " ");
+      	}
+      	
+      	
+	token = strtok(input2, " ");
+			
+	if (debug) {
+		printf("\nArgument List: ");
+	}
+	
+	if (input_file) {
+		char* argument_list[params - 1];
+		
+    		for(int i = 0; i < params; i++) {
+        		if (*argument_list[i-1] == 0x3C)
+        		{	
+        			if (debug) {
+        				printf("replacing <");
+        			}
+        			argument_list[i-1] = token;
+        		}
+        		else if (*argument_list[i-1] == 0x3E)
+        		{	
+        			printf("Out File: %s ", token);
+        			argument_list[i] = token;
+        			out_file = token;
+        		}
+        		else
+        			argument_list[i] = token;
+        		if (debug) {
+    				printf("%s\n", token);
+    			}
+        		token = strtok(NULL, " ");
+        	}
+        	
+        	int status;
+			
+		pid_t pid = fork();
+			
+		// if we need the PID of the Child
+    		pid_t child = getpid();
+
+		
+		// if in child process
+		if(pid == 0){
+			// run input inside child process bro ...
+        		if (debug) 
+        			printf("\nIn Child: %d\n", child);
+        		toggle = 1;
+        		fflush(stdout);
+        		int status_code = execvp(argument_list[0], argument_list);
+        	
+        		if (status_code == -1) {
+        			printf("%s: command not found\n", input);
+        			exit(100);
+        		}
+		}	
+        	// if in parent process
+    		else {
+    			toggle = 1;
+			wait(NULL);
+    		}
+    		
+    		input_file = 0;
+        	
+        	
+    	}
+    	
+}
+	
+	
+
+
+
+
+
+
+
 
