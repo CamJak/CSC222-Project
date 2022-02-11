@@ -35,7 +35,8 @@ int main (void) {
 		if (toggle == 0) {
 			// run input inside child process bro ...
 			// printf("I should be running in a child process...\n");
-			run = execute_command(input2, debug);
+			//run = execute_command(input2, debug);
+			output_to_file(input2, debug);
 		}
 	}	
 }
