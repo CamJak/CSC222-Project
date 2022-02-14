@@ -47,7 +47,7 @@ char keyword_check (char input[], char *ptr) {
 		token = strtok(NULL, " ");
 		int ch = chdir(token);
 		if(ch<0) {
-            		printf("%s: No such file or directory\n", token);
+            		printf("%s: No sexituch file or directory\n", token);
         	}
 		return 1;
 	}
@@ -133,6 +133,7 @@ char output_to_file (char input[], char debug) {
 	char* token = strtok(input, " ");
 	char* my_output_file;
 	char* my_input_file;
+
 	
 	if (debug)
 		printf("Arguments: ");
@@ -147,15 +148,15 @@ char output_to_file (char input[], char debug) {
          		output_file_found = 0;
          		output_file = 1;
          	}
-         	if (input_file_found == 1) {
+         	else if (input_file_found == 1) {
          		my_input_file = token;
          		input_file_found = 0;
          		input_file = 1;
          	}
-         	if (*token == 0x3E) {
+         	else if (*token == 0x3E) {
          		output_file_found = 1;
          	}
-         	if (*token == 0x3C) {
+         	else if (*token == 0x3C) {
          		input_file_found = 1;
          	}
          	
@@ -174,9 +175,12 @@ char output_to_file (char input[], char debug) {
 	
 	// only runs if an output file is specified
 	if (output_file == 1) {
-		char* argument_list[params - 2];
-    		for(int i = 0; i < params - 2; i++) {
-        		argument_list[i] = token;
+		char* argument_list[params - 1];
+    		for(int i = 0; i < params - 1; i++) {
+        		if (*token == 0x3E)
+    				argument_list[i] = NULL;
+    			else
+        			argument_list[i] = token;
         		if (debug)
     				printf("%s ", token);
         		token = strtok(NULL, " ");
@@ -228,10 +232,11 @@ char output_to_file (char input[], char debug) {
     	
     	// only runs if an input file is specified (still broken)
     	else if (input_file == 1) {
+    		
     		char* argument_list[params - 1];
     		for(int i = 0; i < params - 1; i++) {
     			if (*token == 0x3C)
-    				argument_list[i] = "-";
+    				argument_list[i] = NULL;
     			else
         			argument_list[i] = token;
         		if (debug)
@@ -261,17 +266,19 @@ char output_to_file (char input[], char debug) {
         			fflush(stdout);
         		}
         		
-        		// directs all following output to given file
+        		// sets input file
         		FILE* infile = fopen(my_input_file, "r");
 			dup2(fileno(infile), 0);
-			fclose(infile);
 			
 			// execute given command
+			// THIS IS WHAT FAILS ----------------------------------------------------
         		int status_code = execvp(argument_list[0], argument_list);
+        		
+        		fclose(infile);
         	
         		// if execute fails
         		if (status_code == -1) {
-        			printf("%s: command not found\n", input);
+        			printf("%s: command not found\n", argument_list[0]);
         			exit(100);
         		}
 		}
@@ -282,7 +289,7 @@ char output_to_file (char input[], char debug) {
     		}
     	}
     	else
-    		printf("No File Specified\n");
+    		printf("No I/O Specified\n");
 }
 
 	
