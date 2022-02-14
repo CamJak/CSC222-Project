@@ -173,8 +173,53 @@ char output_to_file (char input[], char debug) {
 		fflush(stdout);
 	}
 	
+	// runs if both an input and output file are specified
+	if (output_file == 1 && input_file == 1) {
+		char* argument_list[params - 3];
+    		for(int i = 0; i < params - 3; i++) {
+        		if (*token == 0x3C)
+    				argument_list[i] = NULL;
+    			else
+        			argument_list[i] = token;
+        		if (debug)
+    				printf("%s ", token);
+        		token = strtok(NULL, " ");
+    		}
+    		
+    		output_file=0;
+    		input_file=0;
+    		
+    		int status;
+    		
+    		pid_t pid = fork();
+    		
+    		pid_t child = getpid();
+    		
+    		if (pid == 0) {
+    			
+    			FILE* outfile = fopen(my_output_file, "w");
+			dup2(fileno(outfile), 1);
+			fclose(outfile);
+			
+			FILE* infile = fopen(my_input_file, "r");
+			dup2(fileno(infile), 0);
+			fclose(infile);
+			
+			int status_code = execvp(argument_list[0], argument_list);
+			
+			if (status_code == -1) {
+        			printf("%s: command not found\n", input);
+        			exit(100);
+        		}
+    		}
+    		
+    		else {
+    			wait(NULL);
+    		}
+	}
+	
 	// only runs if an output file is specified
-	if (output_file == 1) {
+	else if (output_file == 1) {
 		char* argument_list[params - 1];
     		for(int i = 0; i < params - 1; i++) {
         		if (*token == 0x3E)
@@ -269,12 +314,10 @@ char output_to_file (char input[], char debug) {
         		// sets input file
         		FILE* infile = fopen(my_input_file, "r");
 			dup2(fileno(infile), 0);
+			fclose(infile);
 			
 			// execute given command
-			// THIS IS WHAT FAILS ----------------------------------------------------
         		int status_code = execvp(argument_list[0], argument_list);
-        		
-        		fclose(infile);
         	
         		// if execute fails
         		if (status_code == -1) {
