@@ -47,7 +47,7 @@ char keyword_check (char input[], char *ptr) {
 		token = strtok(NULL, " ");
 		int ch = chdir(token);
 		if(ch<0) {
-            		printf("%s: No sexituch file or directory\n", token);
+            		printf("%s: No such file or directory\n", token);
         	}
 		return 1;
 	}
@@ -56,7 +56,32 @@ char keyword_check (char input[], char *ptr) {
 	return 0;
 }
 
+/*
+	Iterates through given input and checks for < or >
+*/
 
+char io_check (char input[]) {
+	// Checks to see if I/O is given or not
+	char io_toggle=0;
+	char* token = strtok(input, " ");
+	while(token != NULL) {
+	 	if (*token == 0x3E) {
+	 		io_toggle=1;
+	 		break;
+	 	} else if (*token == 0x3C) {
+	 		io_toggle=1;
+	 		break;
+	 	} else
+	 		io_toggle=0;
+	 	
+	 	token = strtok(NULL, " ");
+      	}
+      	return io_toggle;
+}
+
+/*
+	Creates child process and runs command given in execvp
+*/
 
 char execute_command (char input[], char debug) {
 
@@ -121,8 +146,11 @@ char execute_command (char input[], char debug) {
     	return 1;
 }
 
-// function to redirect output to a file
-char output_to_file (char input[], char debug) {
+/*
+	redirects I/O to or from a file
+*/
+
+char file_IO (char input[], char debug) {
 
 	int params = 0;
 	char output_file = 0;

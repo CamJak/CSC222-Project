@@ -39,25 +39,14 @@ int main (void) {
 		// if none of the above commands run, run input in child process
 		if (toggle == 0) {
 			
-			// Checks to see if I/O is given or not
-			char* token = strtok(input3, " ");
-			while(token != NULL) {
-			 	if (*token == 0x3E) {
-			 		io_toggle=1;
-			 		break;
-			 	} else if (*token == 0x3C) {
-			 		io_toggle=1;
-			 		break;
-			 	} else
-			 		io_toggle=0;
-			 	
-			 	token = strtok(NULL, " ");
-		      	}
+			// checks if I/O is directed in command
+			io_toggle = io_check(input3);
       	
+      			// if I/O is specified, use it, otherwise just run command
 			if (io_toggle == 0) {
 				run = execute_command(input2, debug);
 			} else
-				output_to_file(input2, debug);
+				file_IO(input2, debug);
 		}
 	}	
 }
