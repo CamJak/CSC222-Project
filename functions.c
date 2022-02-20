@@ -8,6 +8,7 @@
 #include <unistd.h>
 #include <sys/wait.h>
 #include <string.h>
+#include <errno.h>
 
 // does all the funky stuff to get cwd and make it look pretty
 char* get_cwd_custom () {
@@ -50,7 +51,7 @@ char keyword_check (char input[], char *ptr) {
 		}
 		int ch = chdir(token);
 		if(ch<0) {
-            		printf("%s: No such file or directory\n", token);
+            		printf("Error 13: %s\n", strerror(errno));
         	}
 		return 1;
 	}
@@ -137,14 +138,14 @@ char execute_command (char input[], char debug) {
         	int status_code = execvp(argument_list[0], argument_list);
         	
         	if (status_code == -1) {
-        		printf("%s: command not found\n", input);
+        		printf("Error 2: %s\n", strerror(errno));
         		exit(100);
         	}
 	}	
         // if in parent process
     	else {
     		toggle = 1;
-		wait(NULL);
+			wait(NULL);
     	}
     	return 1;
 }
@@ -239,7 +240,7 @@ char file_IO (char input[], char debug) {
 			int status_code = execvp(argument_list[0], argument_list);
 			
 			if (status_code == -1) {
-        			printf("%s: command not found\n", input);
+        			printf("Error 2: %s\n", strerror(errno));
         			exit(100);
         		}
     		}
@@ -352,7 +353,7 @@ char file_IO (char input[], char debug) {
         	
         		// if execute fails
         		if (status_code == -1) {
-        			printf("%s: command not found\n", argument_list[0]);
+        			printf("Error 2: %s\n", strerror(errno));;
         			exit(100);
         		}
 		}
