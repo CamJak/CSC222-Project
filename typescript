@@ -1,17 +1,73 @@
-Script started on 2022-02-09 12:28:23-08:00 [TERM="xterm-256color" TTY="/dev/pts/0" COLUMNS="80" LINES="24"]
+Script started on 2022-02-20 15:48:02-08:00 [TERM="xterm-256color" TTY="/dev/pts/0" COLUMNS="80" LINES="24"]
 [1;32mcam[1;32m@[1;32mubuntu:[1;35m~/Desktop/CSC222-Project[1;36m$[0m make
-/home/cam/Desktop/CSC222-Project$ hello
-I should be running in a child process...
-/home/cam/Desktop/CSC222-Project$ cd ..
-/home/cam/Desktop$ cd ..
-/home/cam$ cd ./Desktop/CSC222-Project
-/home/cam/Desktop/CSC222-Project$ pwd
+[92m/home/cam/Desktop/CSC222-Project[96m$[0m cd ..
+[92m/home/cam/Desktop[96m$[0m cd CDC  SC222-Project^[[D^[[D                      ./CSC222-Projet ct
+[92m/home/cam/Desktop/CSC222-Project[96m$[0m pwd
 /home/cam/Desktop/CSC222-Project
-/home/cam/Desktop/CSC222-Project$ cd ..
-/home/cam/Desktop$ pwd
-/home/cam/Desktop
-/home/cam/Desktop$ exit
+[92m/home/cam/Desktop/CSC222-Project[96m$[0m cd ..
+[92m/home/cam/Desktop[96m$[0m cd ..
+[92m/home/cam[96m$[0m pwd
+/home/cam
+[92m/home/cam[96m$[0m ls -lh texh  chshell.c
+ls: cannot access 'techshell.c': No such file or directory
+[92m/home/cam[96m$[0m cd ./Desktop/CSC222-Project
+[92m/home/cam/Desktop/CSC222-Project[96m$[0m ls -lh techshell.c
+-rwxrwxr-x 1 cam cam 1.1K Feb 20 15:45 techshell.c
+[92m/home/cam/Desktop/CSC222-Project[96m$[0m chmod 400 techshell.c
+[92m/home/cam/Desktop/CSC222-Project[96m$[0m ls -lh techshell.c
+-r-------- 1 cam cam 1.1K Feb 20 15:45 techshell.c
+[92m/home/cam/Desktop/CSC222-Project[96m$[0m ls /root
+ls: cannot open directory '/root': Permission denied
+[92m/home/cam/Desktop/CSC222-Project[96m$[0m horsefave  ce
+Error 2: No such file or directory
+[92m/home/cam/Desktop/CSC222-Project[96m$[0m cd /root
+Error 13: Permission denied
+[92m/home/cam/Desktop/CSC222-Project[96m$[0m ps
+    PID TTY          TIME CMD
+   2126 pts/1    00:00:00 bash
+   2127 pts/1    00:00:00 make
+   2133 pts/1    00:00:00 techshell
+   2142 pts/1    00:00:00 ps
+[92m/home/cam/Desktop/CSC222-Project[96m$[0m whereis ps
+ps: /usr/bin/ps /usr/share/man/man1/ps.1.gz
+[92m/home/cam/Desktop/CSC222-Project[96m$[0m /bin/    usr/bin/ps u
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+cam         1486  0.0  0.0 172652  6260 tty2     Ssl+ 15:44   0:00 /usr/lib/gdm3
+cam         1493  4.7  0.8 298220 71276 tty2     Sl+  15:44   0:18 /usr/lib/xorg
+cam         1572  0.1  0.1 199368 15300 tty2     Sl+  15:44   0:00 /usr/libexec/
+cam         2029  0.0  0.0  18476  4000 pts/0    Ss   15:45   0:00 bash
+cam         2125  0.0  0.0  16844  2144 pts/0    S+   15:48   0:00 script
+cam         2126  0.0  0.0  18476  4004 pts/1    Ss   15:48   0:00 bash -i
+cam         2127  0.0  0.0  17084  2224 pts/1    S+   15:48   0:00 make
+cam         2133  0.0  0.0   2500  1460 pts/1    S+   15:48   0:00 ./techshell
+cam         2147  0.0  0.0  20132  3208 pts/1    R+   15:51   0:00 /usr/bin/ps u
+[92m/home/cam/Desktop/CSC222-Project[96m$[0m ls
+functions.c  Makefile  README  techshell  techshell.c  typescript
+[92m/home/cam/Desktop/CSC222-Project[96m$[0m ps u > ps, .out
+[92m/home/cam/Desktop/CSC222-Project[96m$[0m wc -l < ps.out
+10
+[92m/home/cam/Desktop/CSC222-Project[96m$[0m wc -l < ps.out > wc.out
+[92m/home/cam/Desktop/CSC222-Project[96m$[0m cat wc.out
+10
+[92m/home/cam/Desktop/CSC222-Project[96m$[0m ls
+functions.c  ps.out  techshell	  typescript
+Makefile     README  techshell.c  wc.out
+[92m/home/cam/Desktop/CSC222-Project[96m$[0m rm ps.out wc.out
+[92m/home/cam/Desktop/CSC222-Project[96m$[0m ls
+functions.c  Makefile  README  techshell  techshell.c  typescript
+[92m/home/cam/Desktop/CSC222-Project[96m$[0m find.    . -name M Makefule   ile
+./Makefile
+[92m/home/cam/Desktop/CSC222-Project[96m$[0m ./techshell           make
+make[1]: Entering directory '/home/cam/Desktop/CSC222-Project'
+make[1]: Leaving directory '/home/cam/Desktop/CSC222-Project'
+[92m/home/cam/Desktop/CSC222-Project[96m$[0m cd De     cd ..
+[92m/home/cam/Desktop[96m$[0m exx it
+[1;32mcam[1;32m@[1;32mubuntu:[1;35m~/Desktop/CSC222-Project[1;36m$[0m sci[Kript
+Script started, file is typescript
+[1;32mcam[1;32m@[1;32mubuntu:[1;35m~/Desktop/CSC222-Project[1;36m$[0m exit
+exit
+Script done, file is typescript
 [1;32mcam[1;32m@[1;32mubuntu:[1;35m~/Desktop/CSC222-Project[1;36m$[0m exit
 exit
 
-Script done on 2022-02-09 12:29:10-08:00 [COMMAND_EXIT_CODE="0"]
+Script done on 2022-02-20 15:53:07-08:00 [COMMAND_EXIT_CODE="0"]
